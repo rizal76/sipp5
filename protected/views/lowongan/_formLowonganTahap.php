@@ -28,8 +28,9 @@
 
 $count = 0;
 foreach ($tahaps as $i => $item): ?>
+    <?php echo $form->errorSummary($item, null , null, array('class'=>'alert alert-danger')); ?>
             <?php echo $form->labelEx($item, $item->tahaps->nama); ?>
-
+            
                    
         
             <?php echo $form->hiddenField($item, '[' . $count . ']id_tahap', array('value' => $item->id_tahap)); ?>
