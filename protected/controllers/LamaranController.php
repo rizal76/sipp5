@@ -150,10 +150,10 @@ class LamaranController extends Controller {
             //ambil file
             $file = CUploadedFile::getInstance($model, 'hasil_tugas');
             $random = rand(0, 9999); //random angka untuk lebih secure dan ubah nama databasenya  
-            if($file !=null)    
-            $model->hasil_tugas = $model->id_pelamar . $random . "." . $file->extensionName;
+            if ($file != null)
+                $model->hasil_tugas = $model->id_pelamar . $random . "." . $file->extensionName;
             else
-                Yii::app()->user->setFlash('notification', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+                Yii::app()->user->setFlash('alert-danger', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             $model->scenario = 'tugas';
             if ($model->save()) { //save model
                 //hapus tugas yang lama
@@ -162,9 +162,9 @@ class LamaranController extends Controller {
                 }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas);
-                Yii::app()->user->setFlash('notification', 'Tugas anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
+                Yii::app()->user->setFlash('alert-info', 'Tugas anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
             } else {
-                Yii::app()->user->setFlash('notification', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+                Yii::app()->user->setFlash('alert-danger', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             }
         }
 
@@ -177,8 +177,13 @@ class LamaranController extends Controller {
             $model->attributes = $_POST['Lamaran'];
             //ambil file
             $file = CUploadedFile::getInstance($model, 'hasil_tugas2');
-            $random = rand(0, 9999); //random angka untuk lebih secure dan ubah nama databasenya      
-            $model->hasil_tugas2 = $model->id_pelamar . $random . "." . $file->extensionName;
+            $random = rand(0, 9999); //random angka untuk lebih secure dan ubah nama databasenya 
+            if ($file != null)
+                $model->hasil_tugas2 = $model->id_pelamar . $random . "." . $file->extensionName;
+            else
+                Yii::app()->user->setFlash('alert-danger', 'Tugas 2 gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+
+            //$model->hasil_tugas2 = $model->id_pelamar . $random . "." . $file->extensionName;
             $model->scenario = 'tugas2';
             if ($model->save()) { //save model
                 //hapus tugas yang lama
@@ -187,9 +192,9 @@ class LamaranController extends Controller {
                 }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas2);
-                Yii::app()->user->setFlash('notification', 'Tugas 2 anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
+                Yii::app()->user->setFlash('alert-info', 'Tugas 2 anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
             } else {
-                Yii::app()->user->setFlash('notification', 'Tugas 2 gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+                Yii::app()->user->setFlash('alert-danger', 'Tugas 2 gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             }
         }
         $this->render('pengumuman', array(

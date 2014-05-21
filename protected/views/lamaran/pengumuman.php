@@ -3,7 +3,7 @@
 <?php
 //tampilin notifikasi yang ada
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
+    echo '<div class="alert ' . $key . '">' . $message . "</div>\n";
 }
 ?>
 
@@ -22,7 +22,7 @@ foreach ($model as $j => $modelp) {
         echo 'Deskripsi  ' . $modelp->proses->deskripsi . '<br>';
         if($modelp->proses->file_tugas!=null) {
         echo 'File Keterangan : ';
-        echo '<a href=' . Yii::app()->baseUrl . '/soal_tugas/' . $modelp->proses->file_tugas . '>Download</a><br>';
+        echo '<a href=' . Yii::app()->baseUrl . '/file_tugas/' . $modelp->proses->file_tugas . '>Download</a><br>';
         }
         ?>
 

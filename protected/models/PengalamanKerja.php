@@ -31,10 +31,11 @@ class PengalamanKerja extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('id_pelamar, nama_perusahaan, gaji_terkahir, tanggal_mulai, tanggal_akhir, posisi, jenis, alasan_berhenti', 'required'),
-            array('id_pelamar, gaji_terkahir', 'numerical', 'integerOnly' => true),
+            array('id_pelamar, gaji_terkahir', 'numerical', 'integerOnly' => true, 'min' => 0),
             array('gaji_terkahir', 'length', 'max' => 30),
             array('posisi, nama_perusahaan, jenis, alasan_berhenti', 'length', 'max' => 400),
             array('tanggal_mulai, tanggal_akhir', 'type', 'type' => 'date', 'message' => '{attribute}: is not a date!', 'dateFormat' => 'yyyy-MM-dd'),
+            array('tanggal_akhir','compare','compareAttribute'=>'tanggal_mulai','operator'=>'>','message'=>'Tanggal Mulai must be less than Tanggal Akhir'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, id_pelamar, nama_perusahaan, gaji_terkahir, tanggal_mulai, tanggal_akhir, posisi, jenis, alasan_berhenti', 'safe', 'on' => 'search'),

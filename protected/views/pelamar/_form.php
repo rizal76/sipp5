@@ -30,11 +30,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
     ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
-   <p class="error-msg"><?php echo $form->errorSummary($model , null , null, array('class'=>'alert alert-danger')); ?></p>
-			
+    <p class="error-msg"><?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-danger')); ?></p>
+
     <?php
     if ($pengalamans != null)
-        echo $form->errorSummary($pengalamans , null , null, array('class'=>'alert alert-danger'));
+        echo $form->errorSummary($pengalamans, null, null, array('class' => 'alert alert-danger'));
     ?>
     <table class="table-condensed">
         <tbody>
@@ -95,7 +95,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'jenjang'); ?></th>
-                <td><?php echo $form->textField($model, 'jenjang', array('size' => 10, 'maxlength' => 10)); ?></td>
+                <td><?php //echo $form->textField($model, 'jenjang', array('size' => 10, 'maxlength' => 10));  ?>
+                    <?php
+                    echo $form->dropDownList($model, 'jenjang', array(
+                        'SD' => 'SD',
+                        'SMP' => 'SMP',
+                        'SMA' => 'SMA',
+                        'S1' => 'S1',
+                        'S2' => 'S2',
+                        'S3' => 'S3'));
+                    ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'jurusan'); ?></th>
@@ -137,15 +146,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
                         <tr><th>Posisi</th><td> <?php echo CHtml::activeTextField($item, "[$i]posisi"); ?></td></tr>
                         <tr><th>Jenis</th><td> <?php echo CHtml::activeTextField($item, "[$i]jenis"); ?></td></tr>
                         <tr><th>Alasan Berhenti</th><td> <?php echo CHtml::activeTextArea($item, "[$i]alasan_berhenti"); ?></td></tr>
-                    <?php endforeach;
+                    <?php
+                    endforeach;
                 }
                 ?>
             </tbody>
         </table>	
     </div>
     <div id="add-pengalaman" onclick="tambah()" style="color:#428bca; cursor:pointer">(+) Tambah Pengalaman Kerja</div><br>
-<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Simpan', array('class' => 'btn btn-primary btn-sm')); ?>
-<?php $this->endWidget(); ?>
+    <?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Simpan', array('class' => 'btn btn-primary btn-sm')); ?>
+    <?php $this->endWidget(); ?>
 </div><!-- form sip -->
 <!-- untuk tambah pengalaman -->
 <script type="text/javascript">
