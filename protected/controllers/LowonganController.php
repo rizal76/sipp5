@@ -74,7 +74,7 @@ class LowonganController extends Controller {
         $rendertahap2 = false;
         // nyari semua tahap yang ada dalam database
         $tahaps = Tahap::model()->findAll();
-        $sss = null; //untuk file
+        $sss = array(); //untuk file harusnya array
         if (isset($_POST['LowonganTahap'])) {
             $lowonganTahapsMasuk = array();
             $valid = true;
@@ -86,7 +86,7 @@ class LowonganController extends Controller {
                     $lowonganTahapsMasuk[$j] = new LowonganTahap; // if you had static model only
                     $lowonganTahapsMasuk[$j]->attributes = $modelp;
                   if (strlen(trim(CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas"))) > 0) {
-                        $sss = CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas");
+                        $sss[$j] = CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas");
                         $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
                     }
                     $fileValidasi = false;
@@ -107,7 +107,7 @@ class LowonganController extends Controller {
                 while (isset($lowonganTahapsMasuk[$i])) {
                     $lowonganTahapsMasuk[$i]->save(false); // models have already been validated    
                     if (strlen(trim($lowonganTahapsMasuk[$i]->file_tugas)) > 0) {
-                        $sss->saveAs(Yii::app()->basePath . '/../file_tugas/' . $lowonganTahapsMasuk[$i]->file_tugas);
+                        $sss[$i]->saveAs(Yii::app()->basePath . '/../file_tugas/' . $lowonganTahapsMasuk[$i]->file_tugas);
                     }
                     $i++;
                     $oke = true;
