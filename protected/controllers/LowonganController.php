@@ -115,7 +115,7 @@ class LowonganController extends Controller {
                 if($oke)
                 Yii::app()->user->setFlash('alert-info', 'Lowongan berhasil di buat !');
             } else {
-                Yii::app()->user->setFlash('alert-danger', 'Lowongan gagal di simpan. Pastikan sesuai format !');
+                Yii::app()->user->setFlash('alert-danger', 'Lowongan gagal di simpan. Pastikan sesuai format file pdf !');
                 $rendertahap2 = true;
                 $this->render('createLowonganTahap', array(
                     'idLowongan' => $model->id, 'tahaps' => $lowonganTahapsMasuk,
